@@ -221,11 +221,6 @@ var PersonVisuals = Class.create(AbstractPersonVisuals, {
       return;
     }
 
-    var gradient = function(color, angle) {
-      var hsb = Raphael.rgb2hsb(color),
-        darker = Raphael.hsb2rgb(hsb['h'],hsb['s'],hsb['b']-.25)['hex'];
-      return angle +'-'+darker+':0-'+color+':100';
-    };
     var disorderShapes = editor.getPaper().set();
     var delta, color;
 
@@ -249,7 +244,7 @@ var PersonVisuals = Class.create(AbstractPersonVisuals, {
           corner = ['L', this.getX(), this.getY()-height];
         }
         var slice = editor.getPaper().path(['M', x1, y1, corner,'L', x2, y2, 'L',this.getX(), this.getY(),'z']);
-        color = gradient(colors[k], 70);
+        color = colors[k];
         disorderShapes.push(slice.attr({fill: color, 'stroke-width':.5, stroke: 'none' }));
         x1 = x2;
         y1 = y2;
@@ -270,7 +265,7 @@ var PersonVisuals = Class.create(AbstractPersonVisuals, {
       }                     // TODO: magic number hack: due to a Raphael transform bug (?) just using correct this._shapeRadius does not work
 
       for(var i = 0; i < colors.length; i++) {
-        color = gradient(colors[i], (i * disorderAngle)+delta);
+        color = colors[i];
         disorderShapes.push(sector(editor.getPaper(), this.getX(), this.getY(), radius,
           this.getNode().getGender(), i * disorderAngle, (i+1) * disorderAngle, color));
       }
