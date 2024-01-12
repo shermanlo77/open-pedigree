@@ -74,6 +74,26 @@ var Person = Class.create(AbstractPerson, {
   },
 
   /**
+     * Returns date as day/month/year string
+     *
+     * @method _getDateDMY
+     * @param {Date} dateObj Date object
+     * @return {String}
+     */
+  _getDateDMY: function(dateObj) {
+    var day = dateObj.getDate();
+    if (day < 10) {
+      day = '0' + day
+    }
+    var month = dateObj.getMonth() + 1; //months from 1-12
+    if (month < 10) {
+      month = '0' + month
+    }
+    var year = dateObj.getFullYear();
+    return day + "/" + month + "/" + year;
+  },
+
+  /**
      * Returns True if this node is the proband (i.e. the main patient)
      *
      * @method isProband
